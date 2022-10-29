@@ -31,6 +31,8 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   TextEditingController controller = TextEditingController();
   var val = true;
+  final _valueList = ['첫 번째', '두 번째', '세 번째'];
+  var _selectedValue = '첫 번째';
 
   @override
   Widget build(BuildContext context) {
@@ -38,23 +40,21 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text("첫번째 플루터 프로젝트"),
       ),
-      body: Column(
-        children: [
-          Checkbox(
-              value: val,
-              onChanged: (value) {
-                setState(() {
-                  val = value!;
-                });
-              }),
-          Switch(
-              value: val,
-              onChanged: (value) {
-                setState(() {
-                  val = value!;
-                });
-              }),
-        ],
+      body: DropdownButton(
+        value: _selectedValue,
+        items: _valueList.map(
+            (value) {
+              return DropdownMenuItem(
+                value: value,
+                child: Text(value),
+              );
+            },
+        ).toList(),
+        onChanged: (value) {
+          setState(() {
+            _selectedValue = value!;
+          });
+        },
       ),
     );
   }
