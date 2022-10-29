@@ -29,25 +29,39 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  var _str = "터치 전";
+  TextEditingController controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("첫 번째 플루터 프로젝트"),
+          title: Text("첫번째 플루터 프로젝트"),
         ),
-        body: ListView(
+        body: Column(
           children: [
-            ListTile(
-              leading: Icon(Icons.person),
-              title: Text("마이페이지"),
-              trailing: Icon(Icons.chevron_right),
-              onTap: () {
-                print("마이페이지 클릭");
+            Container(
+              width: 100,
+              child: TextField(
+                decoration: InputDecoration(
+                  hintText: "아이디를 입력해주세요",
+                  labelText: "아이디",
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                  ),
+                ),
+                controller: controller,
+                onChanged: (text) {
+                  print(text);
+                }
+    ),
+            ), TextButton(
+              child: Text('회원가입'),
+              onPressed: () {
+                print(controller.text);
               },
-            )
+            ),
           ],
-        ));
+        ),
+    );
   }
 }
